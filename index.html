@@ -5,24 +5,35 @@
   <title>2025 員工獎金表</title>
   <style>
     body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f5f5;
       margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
+      padding: 20px;
     }
 
     .container {
-      max-width: 1200px;
-      margin: 30px auto;
-      padding: 20px;
-      background: white;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      border-radius: 12px;
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
     h1 {
       text-align: center;
-      color: #333;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    select {
+      padding: 8px;
+      font-size: 16px;
+      margin-top: 10px;
+      margin-bottom: 20px;
     }
 
     iframe {
@@ -35,10 +46,35 @@
 </head>
 <body>
   <div class="container">
-    <h1>2025 員工獎金表：4月總表</h1>
-    <iframe 
-      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1934548134&amp;single=true&amp;widget=true&amp;headers=false">
-    </iframe>
+    <h1>2025 員工獎金表</h1>
+
+    <label for="monthSelect">選擇月份：</label>
+    <select id="monthSelect">
+      <option value="3">3 月</option>
+      <option value="4" selected>4 月</option>
+      <option value="5">5 月</option>
+    </select>
+
+    <iframe id="bonusIframe" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1934548134&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
   </div>
+
+  <script>
+    const iframe = document.getElementById('bonusIframe');
+    const monthSelect = document.getElementById('monthSelect');
+
+    const links = {
+      3: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=0&single=true&widget=true&headers=false',
+      4: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1934548134&single=true&widget=true&headers=false',
+      5: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1897136438&single=true&widget=true&headers=false'
+    };
+
+    monthSelect.addEventListener('change', () => {
+      const selected = monthSelect.value;
+      const url = links[selected];
+      if (url) {
+        iframe.src = url;
+      }
+    });
+  </script>
 </body>
 </html>
