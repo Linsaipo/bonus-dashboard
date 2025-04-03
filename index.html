@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>2025 員工獎金表</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -18,22 +19,31 @@
       padding: 30px;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .logo {
+      max-width: 120px;
+      margin-bottom: 20px;
     }
 
     h1 {
-      text-align: center;
       margin-bottom: 20px;
     }
 
     label {
       font-weight: bold;
+      display: block;
+      margin-bottom: 8px;
     }
 
     select {
-      padding: 8px;
+      width: 100%;
+      padding: 10px;
       font-size: 16px;
-      margin-top: 10px;
       margin-bottom: 20px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
     }
 
     iframe {
@@ -42,11 +52,30 @@
       border: none;
       border-radius: 8px;
     }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 15px;
+      }
+
+      .logo {
+        max-width: 80px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+
+      select {
+        font-size: 14px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>2025 員工獎金表</h1>
+    <img src="1614680367818@2x.jpg" alt="公司 Logo" class="logo">
+    <h1 id="pageTitle">2025 年 4 月員工獎金表</h1>
 
     <label for="monthSelect">選擇月份：</label>
     <select id="monthSelect">
@@ -61,6 +90,7 @@
   <script>
     const iframe = document.getElementById('bonusIframe');
     const monthSelect = document.getElementById('monthSelect');
+    const pageTitle = document.getElementById('pageTitle');
 
     const links = {
       3: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=0&single=true&widget=true&headers=false',
@@ -68,12 +98,16 @@
       5: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1897136438&single=true&widget=true&headers=false'
     };
 
+    const titles = {
+      3: '2025 年 3 月員工獎金表',
+      4: '2025 年 4 月員工獎金表',
+      5: '2025 年 5 月員工獎金表'
+    };
+
     monthSelect.addEventListener('change', () => {
       const selected = monthSelect.value;
-      const url = links[selected];
-      if (url) {
-        iframe.src = url;
-      }
+      iframe.src = links[selected];
+      pageTitle.textContent = titles[selected];
     });
   </script>
 </body>
