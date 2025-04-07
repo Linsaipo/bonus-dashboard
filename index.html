@@ -118,7 +118,7 @@
       const bonusValue = bonusSelect.value;
       const recordValue = recordSelect.value;
 
-      if (recordValue !== 'none') {
+      if (recordValue && recordValue !== 'none' && recordLinks[recordValue]) {
         iframe.src = recordLinks[recordValue];
         pageTitle.textContent = `2025 年 ${recordValue.replace('record', '')} 月工作紀錄`;
       } else {
