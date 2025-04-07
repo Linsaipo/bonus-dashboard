@@ -80,6 +80,7 @@
 
     <label for="bonusSelect">選擇獎金月份：</label>
     <select id="bonusSelect">
+      <option value="none">-- 不顯示 --</option>
       <option value="3">3 月</option>
       <option value="4" selected>4 月</option>
       <option value="5">5 月</option>
@@ -118,10 +119,12 @@
       const bonusValue = bonusSelect.value;
       const recordValue = recordSelect.value;
 
-      if (recordValue && recordValue !== 'none' && recordLinks[recordValue]) {
+      if (recordValue !== 'none') {
+        bonusSelect.value = 'none';
         iframe.src = recordLinks[recordValue];
         pageTitle.textContent = `2025 年 ${recordValue.replace('record', '')} 月工作紀錄`;
-      } else {
+      } else if (bonusValue !== 'none') {
+        recordSelect.value = 'none';
         iframe.src = bonusLinks[bonusValue];
         pageTitle.textContent = `2025 年 ${bonusValue} 月員工獎金表`;
       }
@@ -129,6 +132,9 @@
 
     bonusSelect.addEventListener('change', updateIframe);
     recordSelect.addEventListener('change', updateIframe);
+
+    // 初次載入時也跑一次邏輯
+    updateIframe();
   </script>
 </body>
 </html>
