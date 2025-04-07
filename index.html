@@ -34,6 +34,7 @@
     label {
       font-weight: bold;
       display: block;
+      margin-top: 20px;
       margin-bottom: 8px;
     }
 
@@ -41,14 +42,14 @@
       width: 100%;
       padding: 10px;
       font-size: 16px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       border-radius: 6px;
       border: 1px solid #ccc;
     }
 
     iframe {
       width: 100%;
-      height: 1000px;
+      min-height: 800px;
       border: none;
       border-radius: 8px;
     }
@@ -77,41 +78,57 @@
     <img src="1614680367818@2x.jpg" alt="公司 Logo" class="logo">
     <h1 id="pageTitle">2025 年 4 月員工獎金表</h1>
 
-    <label for="monthSelect">選擇月份：</label>
-    <select id="monthSelect">
+    <label for="bonusSelect">選擇獎金月份：</label>
+    <select id="bonusSelect">
       <option value="3">3 月</option>
       <option value="4" selected>4 月</option>
       <option value="5">5 月</option>
-      <option value="record">4 月工作紀錄</option>
     </select>
 
-    <iframe id="bonusIframe" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1934548134&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+    <label for="recordSelect">選擇工作紀錄：</label>
+    <select id="recordSelect">
+      <option value="none" selected>-- 不顯示 --</option>
+      <option value="record3">3 月</option>
+      <option value="record4">4 月</option>
+      <option value="record5">5 月</option>
+    </select>
+
+    <iframe id="contentFrame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1934548134&single=true&widget=true&headers=false"></iframe>
   </div>
 
   <script>
-    const iframe = document.getElementById('bonusIframe');
-    const monthSelect = document.getElementById('monthSelect');
+    const iframe = document.getElementById('contentFrame');
+    const bonusSelect = document.getElementById('bonusSelect');
+    const recordSelect = document.getElementById('recordSelect');
     const pageTitle = document.getElementById('pageTitle');
 
-    const links = {
+    const bonusLinks = {
       3: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=0&single=true&widget=true&headers=false',
       4: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1934548134&single=true&widget=true&headers=false',
-      5: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1897136438&single=true&widget=true&headers=false',
-      record: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=796201572&single=true&widget=true&headers=false'
+      5: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1897136438&single=true&widget=true&headers=false'
     };
 
-    const titles = {
-      3: '2025 年 3 月員工獎金表',
-      4: '2025 年 4 月員工獎金表',
-      5: '2025 年 5 月員工獎金表',
-      record: '2025 年 4 月工作紀錄'
+    const recordLinks = {
+      record3: 'https://docs.google.com/spreadsheets/d/1X1zOPr4iwDpBMYzYtt3LOdqpclrfImWSb80qur95Auo/preview?gid=184295141&rm=minimal',
+      record4: 'https://docs.google.com/spreadsheets/d/1X1zOPr4iwDpBMYzYtt3LOdqpclrfImWSb80qur95Auo/preview?gid=796201572&rm=minimal',
+      record5: 'https://docs.google.com/spreadsheets/d/1X1zOPr4iwDpBMYzYtt3LOdqpclrfImWSb80qur95Auo/preview?gid=1112961105&rm=minimal'
     };
 
-    monthSelect.addEventListener('change', () => {
-      const selected = monthSelect.value;
-      iframe.src = links[selected];
-      pageTitle.textContent = titles[selected];
-    });
+    function updateIframe() {
+      const bonusValue = bonusSelect.value;
+      const recordValue = recordSelect.value;
+
+      if (recordValue !== 'none') {
+        iframe.src = recordLinks[recordValue];
+        pageTitle.textContent = `2025 年 ${recordValue.replace('record', '')} 月工作紀錄`;
+      } else {
+        iframe.src = bonusLinks[bonusValue];
+        pageTitle.textContent = `2025 年 ${bonusValue} 月員工獎金表`;
+      }
+    }
+
+    bonusSelect.addEventListener('change', updateIframe);
+    recordSelect.addEventListener('change', updateIframe);
   </script>
 </body>
 </html>
