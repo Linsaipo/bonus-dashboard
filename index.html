@@ -119,18 +119,23 @@
       const recordValue = recordSelect.value;
 
       if (recordValue !== 'none') {
-        bonusSelect.value = 'none';
         iframe.src = recordLinks[recordValue];
         pageTitle.textContent = `2025 年 ${recordValue.replace('record', '')} 月工作紀錄`;
       } else if (bonusValue !== 'none') {
-        recordSelect.value = 'none';
         iframe.src = bonusLinks[bonusValue];
         pageTitle.textContent = `2025 年 ${bonusValue} 月員工獎金表`;
       }
     }
 
-    bonusSelect.addEventListener('change', updateIframe);
-    recordSelect.addEventListener('change', updateIframe);
+    bonusSelect.addEventListener('change', () => {
+      recordSelect.value = 'none';
+      updateIframe();
+    });
+
+    recordSelect.addEventListener('change', () => {
+      bonusSelect.value = 'none';
+      updateIframe();
+    });
 
     updateIframe();
   </script>
