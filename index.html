@@ -110,9 +110,9 @@
     };
 
     const recordLinks = {
-      record3: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=184295141&single=true&widget=true&headers=false',
-      record4: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=796201572&single=true&widget=true&headers=false',
-      record5: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1112961105&single=true&widget=true&headers=false'
+      record3: 'https://docs.google.com/spreadsheets/d/1X1zOPr4iwDpBMYzYtt3LOdqpclrfImWSb80qur95Auo/preview?gid=184295141&rm=minimal',
+      record4: 'https://docs.google.com/spreadsheets/d/1X1zOPr4iwDpBMYzYtt3LOdqpclrfImWSb80qur95Auo/preview?gid=796201572&rm=minimal',
+      record5: 'https://docs.google.com/spreadsheets/d/1X1zOPr4iwDpBMYzYtt3LOdqpclrfImWSb80qur95Auo/preview?gid=1112961105&rm=minimal'
     };
 
     function updateIframe() {
@@ -122,21 +122,16 @@
       if (recordValue !== 'none') {
         iframe.src = recordLinks[recordValue];
         pageTitle.textContent = `2025 年 ${recordValue.replace('record', '')} 月工作紀錄`;
+        bonusSelect.value = 'none';
       } else if (bonusValue !== 'none') {
         iframe.src = bonusLinks[bonusValue];
         pageTitle.textContent = `2025 年 ${bonusValue} 月員工獎金表`;
+        recordSelect.value = 'none';
       }
     }
 
-    bonusSelect.addEventListener('change', () => {
-      recordSelect.value = 'none';
-      updateIframe();
-    });
-
-    recordSelect.addEventListener('change', () => {
-      bonusSelect.value = 'none';
-      updateIframe();
-    });
+    bonusSelect.addEventListener('change', updateIframe);
+    recordSelect.addEventListener('change', updateIframe);
 
     // 初次載入時也跑一次邏輯
     updateIframe();
