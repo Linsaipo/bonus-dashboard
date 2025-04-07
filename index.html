@@ -80,7 +80,6 @@
 
     <label for="bonusSelect">選擇獎金月份：</label>
     <select id="bonusSelect">
-      <option value="none">-- 不顯示 --</option>
       <option value="3">3 月</option>
       <option value="4" selected>4 月</option>
       <option value="5">5 月</option>
@@ -94,7 +93,7 @@
       <option value="record5">5 月</option>
     </select>
 
-    <iframe id="contentFrame" src=""></iframe>
+    <iframe id="contentFrame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1934548134&single=true&widget=true&headers=false"></iframe>
   </div>
 
   <script>
@@ -110,9 +109,9 @@
     };
 
     const recordLinks = {
-      record3: 'https://docs.google.com/spreadsheets/d/1X1zOPr4iwDpBMYzYtt3LOdqpclrfImWSb80qur95Auo/preview?gid=184295141&rm=minimal',
-      record4: 'https://docs.google.com/spreadsheets/d/1X1zOPr4iwDpBMYzYtt3LOdqpclrfImWSb80qur95Auo/preview?gid=796201572&rm=minimal',
-      record5: 'https://docs.google.com/spreadsheets/d/1X1zOPr4iwDpBMYzYtt3LOdqpclrfImWSb80qur95Auo/preview?gid=1112961105&rm=minimal'
+      record3: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=184295141&single=true&widget=true&headers=false',
+      record4: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=796201572&single=true&widget=true&headers=false',
+      record5: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1112961105&single=true&widget=true&headers=false'
     };
 
     function updateIframe() {
@@ -120,28 +119,19 @@
       const recordValue = recordSelect.value;
 
       if (recordValue !== 'none') {
+        bonusSelect.value = 'none';
         iframe.src = recordLinks[recordValue];
         pageTitle.textContent = `2025 年 ${recordValue.replace('record', '')} 月工作紀錄`;
       } else if (bonusValue !== 'none') {
+        recordSelect.value = 'none';
         iframe.src = bonusLinks[bonusValue];
         pageTitle.textContent = `2025 年 ${bonusValue} 月員工獎金表`;
-      } else {
-        iframe.src = '';
-        pageTitle.textContent = '2025 年員工獎金表';
       }
     }
 
-    bonusSelect.addEventListener('change', () => {
-      recordSelect.value = 'none';
-      updateIframe();
-    });
+    bonusSelect.addEventListener('change', updateIframe);
+    recordSelect.addEventListener('change', updateIframe);
 
-    recordSelect.addEventListener('change', () => {
-      bonusSelect.value = 'none';
-      updateIframe();
-    });
-
-    // 預設載入一次（4 月獎金）
     updateIframe();
   </script>
 </body>
