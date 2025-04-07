@@ -94,7 +94,7 @@
       <option value="record5">5 月</option>
     </select>
 
-    <iframe id="contentFrame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1934548134&single=true&widget=true&headers=false"></iframe>
+    <iframe id="contentFrame" src=""></iframe>
   </div>
 
   <script>
@@ -122,18 +122,26 @@
       if (recordValue !== 'none') {
         iframe.src = recordLinks[recordValue];
         pageTitle.textContent = `2025 年 ${recordValue.replace('record', '')} 月工作紀錄`;
-        bonusSelect.value = 'none';
       } else if (bonusValue !== 'none') {
         iframe.src = bonusLinks[bonusValue];
         pageTitle.textContent = `2025 年 ${bonusValue} 月員工獎金表`;
-        recordSelect.value = 'none';
+      } else {
+        iframe.src = '';
+        pageTitle.textContent = '2025 年員工獎金表';
       }
     }
 
-    bonusSelect.addEventListener('change', updateIframe);
-    recordSelect.addEventListener('change', updateIframe);
+    bonusSelect.addEventListener('change', () => {
+      recordSelect.value = 'none';
+      updateIframe();
+    });
 
-    // 初次載入時也跑一次邏輯
+    recordSelect.addEventListener('change', () => {
+      bonusSelect.value = 'none';
+      updateIframe();
+    });
+
+    // 預設載入一次（4 月獎金）
     updateIframe();
   </script>
 </body>
