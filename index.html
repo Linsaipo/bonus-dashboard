@@ -82,6 +82,7 @@
       <option value="3">3 月</option>
       <option value="4" selected>4 月</option>
       <option value="5">5 月</option>
+      <option value="record">4 月工作紀錄</option>
     </select>
 
     <iframe id="bonusIframe" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1934548134&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
@@ -95,13 +96,15 @@
     const links = {
       3: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=0&single=true&widget=true&headers=false',
       4: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1934548134&single=true&widget=true&headers=false',
-      5: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1897136438&single=true&widget=true&headers=false'
+      5: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1897136438&single=true&widget=true&headers=false',
+      record: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=796201572&single=true&widget=true&headers=false'
     };
 
     const titles = {
       3: '2025 年 3 月員工獎金表',
       4: '2025 年 4 月員工獎金表',
-      5: '2025 年 5 月員工獎金表'
+      5: '2025 年 5 月員工獎金表',
+      record: '2025 年 4 月工作紀錄'
     };
 
     monthSelect.addEventListener('change', () => {
