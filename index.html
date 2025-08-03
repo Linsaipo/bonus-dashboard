@@ -110,17 +110,17 @@
     <iframe id="contentFrame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1934548134&single=true&widget=true&headers=false"></iframe>
   </div>
 
-  <script>
-    const iframe = document.getElementById('contentFrame');
-    const bonusSelect = document.getElementById('bonusSelect');
-    const recordSelect = document.getElementById('recordSelect');
-    const pageTitle = document.getElementById('pageTitle');
+<script>
+const iframe = document.getElementById('contentFrame');
+const bonusSelect = document.getElementById('bonusSelect');
+const recordSelect = document.getElementById('recordSelect');
+const pageTitle = document.getElementById('pageTitle');
 
 const bonusLinks = {
   3: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=0&single=true&widget=true&headers=false',
   4: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1934548134&single=true&widget=true&headers=false',
   5: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1055010418&single=true&widget=true&headers=false',
-  6: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1674759009&single=true&widget=true&headers=false'
+  6: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1674759009&single=true&widget=true&headers=false',
   7: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=496893523&single=true&widget=true&headers=false'
 };
 
@@ -128,33 +128,34 @@ const recordLinks = {
   record3: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=184295141&single=true&widget=true&headers=false',
   record4: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=796201572&single=true&widget=true&headers=false',
   record5: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1112961105&single=true&widget=true&headers=false',
-  record6: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1537398938&single=true&widget=true&headers=false'
+  record6: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1537398938&single=true&widget=true&headers=false',
   record7: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=40424890&single=true&widget=true&headers=false'
 };
-    function updateIframe() {
-      const bonusValue = bonusSelect.value;
-      const recordValue = recordSelect.value;
 
-      if (recordValue !== 'none') {
-        iframe.src = recordLinks[recordValue];
-        pageTitle.textContent = `2025 年 ${recordValue.replace('record', '')} 月工作紀錄`;
-      } else if (bonusValue !== 'none') {
-        iframe.src = bonusLinks[bonusValue];
-        pageTitle.textContent = `2025 年 ${bonusValue} 月員工獎金表`;
-      }
-    }
+function updateIframe() {
+  const bonusValue = bonusSelect.value;
+  const recordValue = recordSelect.value;
 
-    bonusSelect.addEventListener('change', () => {
-      recordSelect.value = 'none';
-      updateIframe();
-    });
+  if (recordValue !== 'none') {
+    iframe.src = recordLinks[recordValue];
+    pageTitle.textContent = `2025 年 ${recordValue.replace('record', '')} 月工作紀錄`;
+  } else if (bonusValue !== 'none') {
+    iframe.src = bonusLinks[bonusValue];
+    pageTitle.textContent = `2025 年 ${bonusValue} 月員工獎金表`;
+  }
+}
 
-    recordSelect.addEventListener('change', () => {
-      bonusSelect.value = 'none';
-      updateIframe();
-    });
+bonusSelect.addEventListener('change', () => {
+  recordSelect.value = 'none';
+  updateIframe();
+});
 
-    updateIframe();
-  </script>
+recordSelect.addEventListener('change', () => {
+  bonusSelect.value = 'none';
+  updateIframe();
+});
+
+updateIframe();
+</script>
 </body>
 </html>
