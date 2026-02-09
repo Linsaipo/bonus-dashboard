@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <title>2025 員工獎金表</title>
+  <title>2026 員工獎金表</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -80,8 +80,10 @@
 
     <label for="bonusSelect">選擇獎金月份：</label>
     <select id="bonusSelect">
+      <option value="1" selected>1 月</option>
+      <option value="2">2 月</option>
       <option value="3">3 月</option>
-      <option value="4" selected>4 月</option>
+      <option value="4">4 月</option>
       <option value="5">5 月</option>
       <option value="6">6 月</option>
       <option value="7">7 月</option>
@@ -95,6 +97,8 @@
     <label for="recordSelect">選擇工作紀錄：</label>
     <select id="recordSelect">
       <option value="none" selected>-- 不顯示 --</option>
+      <option value="record3">1 月</option>  
+      <option value="record3">2 月</option>
       <option value="record3">3 月</option>
       <option value="record4">4 月</option>
       <option value="record5">5 月</option>
@@ -117,6 +121,8 @@ const recordSelect = document.getElementById('recordSelect');
 const pageTitle = document.getElementById('pageTitle');
 
 const bonusLinks = {
+  1: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=758112584&single=true&widget=true&headers=false',
+  2: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=4346487&single=true&widget=true&headers=false',
   3: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=0&single=true&widget=true&headers=false',
   4: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1934548134&single=true&widget=true&headers=false',
   5: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1055010418&single=true&widget=true&headers=false',
@@ -130,6 +136,8 @@ const bonusLinks = {
 };
 
 const recordLinks = {
+  record1: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=898944577&single=true&widget=true&headers=false',
+  record2: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=841866989&single=true&widget=true&headers=false',
   record3: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=184295141&single=true&widget=true&headers=false',
   record4: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=796201572&single=true&widget=true&headers=false',
   record5: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqjJTBHrUo1w0wO8cnkHH0aJmk4vXtoTx8F3YuQl9hh1VPuAk5sEOdIccqHZ7GCgyJ2lJK5XJhOsNx/pubhtml?gid=1112961105&single=true&widget=true&headers=false',
